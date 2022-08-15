@@ -15,7 +15,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		//img = new Texture("badlogic.jpg");
+		img = new Texture("piglet.jpg");
 	}
 
 	@Override
@@ -26,9 +27,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clk++;
 		Gdx.graphics.setTitle("Clicked " + clk + " times");
 		batch.begin();
-	//	batch.draw(img, 0, 0);
 		batch.draw(img, x, y);
-		//batch.draw(img, x*2, 0);
 		batch.end();
 	}
 	
