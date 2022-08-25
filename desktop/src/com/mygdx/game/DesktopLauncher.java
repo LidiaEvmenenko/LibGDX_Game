@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("My Game");
 
-		new Lwjgl3Application(new MyGdxGame(), config);
+		new Lwjgl3Application(new Main(), config);
 	}
 }
