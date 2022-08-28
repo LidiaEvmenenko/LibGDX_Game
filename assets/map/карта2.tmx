@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="36" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="3">
+ <tileset firstgid="1" name="monochrome_tilemap" tilewidth="16" tileheight="16" spacing="1" tilecount="400" columns="20">
+  <image source="monochrome_tilemap.png" width="339" height="339"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="244" duration="100"/>
+    <frame tileid="264" duration="100"/>
+    <frame tileid="284" duration="100"/>
+    <frame tileid="304" duration="100"/>
+    <frame tileid="243" duration="100"/>
+    <frame tileid="263" duration="100"/>
+    <frame tileid="283" duration="100"/>
+    <frame tileid="303" duration="100"/>
+    <frame tileid="242" duration="100"/>
+    <frame tileid="262" duration="100"/>
+    <frame tileid="282" duration="100"/>
+    <frame tileid="302" duration="100"/>
+    <frame tileid="301" duration="100"/>
+    <frame tileid="281" duration="100"/>
+    <frame tileid="261" duration="100"/>
+    <frame tileid="241" duration="100"/>
+    <frame tileid="240" duration="100"/>
+    <frame tileid="260" duration="100"/>
+    <frame tileid="280" duration="100"/>
+    <frame tileid="300" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="131">
+   <animation>
+    <frame tileid="240" duration="100"/>
+    <frame tileid="260" duration="100"/>
+    <frame tileid="280" duration="100"/>
+    <frame tileid="300" duration="100"/>
+    <frame tileid="245" duration="100"/>
+    <frame tileid="265" duration="100"/>
+    <frame tileid="285" duration="100"/>
+    <frame tileid="305" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="232">
+   <animation>
+    <frame tileid="289" duration="100"/>
+    <frame tileid="309" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="292">
+   <animation>
+    <frame tileid="380" duration="100"/>
+    <frame tileid="381" duration="100"/>
+    <frame tileid="382" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="311">
+   <animation>
+    <frame tileid="163" duration="100"/>
+    <frame tileid="164" duration="100"/>
+    <frame tileid="165" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="Слой 1" width="36" height="16">
+  <data encoding="base64" compression="zlib">
+   eJyVVTFSAzEM9JVXXpInmMnQU9CkTU9LR8ErruUhvAI+QFKEDzAUlw9A3hB5sOY2y+oyV+zIkm1ptScnuUnpNY3ozc/Npe8ofgbr8dyMPq57kYdreS6+53s9xXLAA/NEa9Ub98x9Mndec685yKX0UPEcnGN90I/05LNRHrbML5oHzs09ID+lj6qj6s2Zp0jLa71FMaWT4ha9CY5FM6b0Vf7UPPI8qPtq/lkDpZ36dnw3iql5UzzL3kswFzxfjrv0h6hH5q1+S94q3g0fhp3A3rAJZsrtPfE5iF4YrHvBtq4/DV+G2+Y/vi3+QD2ipm0aubS1xlD3DhNzod7DHD7cC+uC+gxkC69V0t8Ke9zWGnP08TzIoQVbzgy1xgC+81Ez5TkfZ/DhN4Y8pvRxXivIwd+c/+cKnx/Dr8DJ8Jwu35v6Ts4tEx/UB3W5qfWfaIaKPVpsAVgaOsO62g5ivr+m9bL6eKejO+rMgnL5mTO+UO39
+  </data>
+ </layer>
+ <objectgroup id="2" name="объекты">
+  <object id="1" name="граница" x="1" y="-1" width="294" height="256"/>
+  <object id="2" name="камера" x="100" y="100">
+   <point/>
+  </object>
+ </objectgroup>
+</map>
