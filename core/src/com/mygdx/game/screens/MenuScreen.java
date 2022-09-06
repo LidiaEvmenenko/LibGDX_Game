@@ -3,6 +3,8 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,6 +24,8 @@ public class MenuScreen implements Screen {
     private Rectangle startRect;
     private float xStart;
     private float yStart;
+    private Music music;
+    private Sound sound;
 
     @Override
     public void resize(int width, int height) {
@@ -54,6 +58,12 @@ public class MenuScreen implements Screen {
         //  shapeRenderer = new ShapeRenderer();
         startRect = new Rectangle(xStart, yStart,
                 imgBtnStart.getWidth(), imgBtnStart.getHeight());
+        music = Gdx.audio.newMusic(Gdx.files.internal("sound/Kalimba.mp3"));
+        music.setLooping(true);// зациклить музыку
+        music.setVolume(0.05f);//громкость
+        //  music.pause();//пауза
+        music.play();//воспроизведение
+        sound = Gdx.audio.newSound(Gdx.files.internal("sound/smeh-471.mp3"));
     }
 
     @Override
@@ -68,8 +78,9 @@ public class MenuScreen implements Screen {
             int y = Gdx.graphics.getHeight() - Gdx.input.getY();
             if (startRect.contains(x, y)){
                 dispose();
-                System.out.println("Mgame = "+game);
                 game.setScreen(new GameScreen(this.game));
+            }else {
+                sound.play();
             }
         }
         ScreenUtils.clear(0.3f, 0.9f, 1, 1);
@@ -83,5 +94,7 @@ public class MenuScreen implements Screen {
         imgBtnStart.dispose();
         imgStart.dispose();
         batch.dispose();
+        music.dispose();
+        sound.dispose();
     }
 }

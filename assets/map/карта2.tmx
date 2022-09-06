@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="36" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="24">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="36" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="50">
  <tileset firstgid="1" name="monochrome_tilemap" tilewidth="16" tileheight="16" spacing="1" tilecount="400" columns="20">
   <image source="monochrome_tilemap.png" width="339" height="339"/>
   <tile id="0">
@@ -61,27 +61,49 @@
  </tileset>
  <layer id="1" name="фон" width="36" height="16">
   <data encoding="base64" compression="zlib">
-   eJyVVTFSAzEM9JVXXpInmMnQU9CkTU9LzyuupeEXvAI+QFKEDzAUlw9A3hB5sOY2y+oyV+zIkm1ptScnuUnpNY3ozc/Npe8ofgbr8dyMPq57kYdreS6+53s9xXLAA/NEa9Ub98x9Mndec685yKX0UPEcnGN90I/05LNRHrbML5oHzs09ID+lj6qj6s2Zp0jLa71FMaWT4ha9CY5FM6b0Vf7UPPI8qPtq/lkDpZ36dnw3iql5UzzL3nMwFzxfjrv0h6hH5q1+S94q3g0fhp3A3rAJZsrtPfE5iF4YrHvBtq4/DV+G2+Y/vi3+QD2ipm0aubS1xlD3DhNzod7DHD7cC+uC+gxkC69V0t8Ke9zWGnP08TzIoQVbzgy1xgC+81Ez5TkfZ/DhN4Y8pvRxXivIwd+c/+cKnx/Dr8DJ8JQu35v6Ts4tEx/UB3W5qfVfaIaKPVpsAVgaOsO62g5ivr+m9bL6eKejO+rMgnL5mTPYkO4l
+   eJyVVTFywjAQlEuXBp6gDEOfIk1aelr6vMJtGiq+wGNICl7ApPALAm/gPNGNl2XPxMXO6U7SaW91snOV0iENaM3P1b3v6P0M1uO5GnwctyIPn+W5eJ/PtRTLAQ/ME41VbVwz18ncecy15iCX0kPFc7CO9UE/0pPXRnnYMr+oHzg314D8lD7qHHXelH6KtHxWWxRTOilu0ZvgWNRjSl/lj/Uj94Par/qfNVDaqbvjvVGMNdgDWMsU9AX3l+M1/SGqkXmrb8kaYkfzvwS+De9BT7l9Iz4nUQuDdXc+Hj+bXVWP+LH4hmrEO6jTwKUuuboydxrpC/UepvDhWlgX1Kcj2/NaJH1XWOMauP1XH8+DHGqw/ZqunNGB73zGeno7gQ+/MeQxpo/zWkAOvnP+z/X21+IXgavhw/AJ+qh7cm6Z+KA+B8BLOXdHPeR2lgbMDY1hWWwDMZ9f0nhefNzT0B61Zka5fM0NeHbqww==
   </data>
  </layer>
  <layer id="3" name="Слой 2" width="36" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALigeZAO2AUjIJRwMA/0A5AAkpArDzQjiADAAARwwB+
+   eJxjYBgFo2AUjALigSYNzW6hodmjYBQMJ8A/0A5AAkpArDzQjiADAABboQEC
   </data>
  </layer>
  <layer id="4" name="Слой 3" width="36" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKBAZYD7YBRMApGAU1A4kA7gAgAAEezAJs=
+   eJxjYBgFo2AUjAL6A0soHgWjYBQMP5A40A4gAgAASSYA1A==
   </data>
  </layer>
  <objectgroup id="5" name="сеттинг">
-  <object id="4" name="камера" x="91" y="71">
-   <point/>
-  </object>
-  <object id="18" name="граница" x="0" y="0" width="579" height="257"/>
-  <object id="19" name="hero" x="241" y="40" width="22" height="26">
+  <object id="19" name="hero" x="16.25" y="125.25" width="15" height="17.75" visible="0">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
+    <property name="color" type="color" value="#00ffff00"/>
+    <property name="friction" type="float" value="0.5"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0.1"/>
+   </properties>
+  </object>
+  <object id="24" name="aaa" x="200.5" y="75.25" width="6.5" height="6.25">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0.5"/>
+   </properties>
+  </object>
+  <object id="42" name="scull" x="449.75" y="226.75" width="13" height="12.75">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0.5"/>
+   </properties>
+  </object>
+  <object id="44" name="eared1" x="65.6667" y="130.667" width="12.6667" height="13.6667">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="friction" type="float" value="0"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
@@ -92,84 +114,112 @@
    <property name="BodyTupe" value="StaticBody"/>
    <property name="gravityScale" type="float" value="1"/>
   </properties>
-  <object id="5" x="0.666667" y="144" width="110.667" height="95.3333">
+  <object id="5" name="земля" x="0.666667" y="144" width="110.667" height="95.3333">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="6" x="114" y="151" width="12" height="81.6667">
+  <object id="6" name="лестница" x="114" y="151" width="12" height="81.6667">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="7" x="0.666667" y="128.667" width="13.6667" height="17">
+  <object id="7" name="дверь левая" x="0.666667" y="128.667" width="13.6667" height="17">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="8" x="192.333" y="192" width="31" height="48">
+  <object id="8" name="земля" x="192.333" y="192" width="31" height="48">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="9" x="223.667" y="159.667" width="34.3333" height="80.3333">
+  <object id="9" name="земля" x="223.667" y="159.667" width="34.3333" height="80.3333">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="10" x="255.667" y="127.667" width="32.3333" height="112">
+  <object id="10" name="земля" x="255.667" y="127.667" width="32.3333" height="112">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="11" x="303" y="143.333" width="17.3333" height="96.3333">
+  <object id="11" name="земля" x="303" y="143.333" width="17.3333" height="96.3333">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="15" x="336" y="159.667" width="15.3333" height="80">
+  <object id="15" name="земля" x="336" y="159.667" width="15.3333" height="80">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="20" x="2" y="239" width="577" height="17">
+  <object id="20" name="земля" x="2" y="239" width="577" height="17">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="21" x="-1" y="-2" width="4" height="257">
+  <object id="21" name="стена" x="-1" y="-2" width="4" height="257">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="22" x="575" y="0" width="4" height="256">
+  <object id="22" name="стена" x="575" y="0" width="4" height="256">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="23" x="368" y="176" width="16" height="68">
+  <object id="23" name="земля" x="368" y="176" width="16" height="68">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="25" name="земля" x="528.25" y="125" width="48.25" height="2.25">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="43" x="0" y="-1" width="578" height="4">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="46" name="лиана" x="386" y="175.333" width="11" height="66">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="48" name="дверь правая" x="559.667" y="111.667" width="16" height="14.6667">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>

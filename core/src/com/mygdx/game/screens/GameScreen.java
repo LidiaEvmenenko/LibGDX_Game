@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -20,6 +21,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Anim;
 import com.mygdx.game.Main;
 import com.mygdx.game.PhysX;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen implements Screen {
     private Vector2 pos;
@@ -38,12 +42,24 @@ public class GameScreen implements Screen {
     private int[] l1;
 
     private PhysX physX;
-    private Body body;
+    private Body bodyHero;
+    private Body bodyAAA;
+    private Body bodyScull;
+    private Body bodyEared1;
     private Rectangle heroRect;
+    private Rectangle aaaRect;
+    private Rectangle scullRect;
+    private Rectangle earedRect1;
+    public static List<Body> bodies;
+    private Sound sound;
+    private long id;
 
     public GameScreen(Main game) {
-        this.game = game;
+        sound = Gdx.audio.newSound(Gdx.files.internal("sound/skrip-otkryivayuscheysya-dveri.mp3"));
+        sound.play();
+        bodies = new ArrayList<>();
         animation = new Anim("atlas/unnamed.atlas", Animation.PlayMode.LOOP);
+        this.game = game;
         batch = new SpriteBatch();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.25f;
@@ -57,9 +73,23 @@ public class GameScreen implements Screen {
         l1[1] = map.getLayers().getIndex("Слой 3");
         physX = new PhysX();
         map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);//выбор объектов по типу
-        RectangleMapObject tmp = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("hero");//выбор объектов по имени
-        heroRect = tmp.getRectangle();
-        body = physX.addObject(tmp);
+        RectangleMapObject tmpHero = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("hero");//выбор объектов по имени
+        RectangleMapObject tmpAAA = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("aaa");//выбор объектов по имени
+        RectangleMapObject tmpScull = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("scull");//выбор объектов по имени
+        RectangleMapObject tmpEared1 = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("eared1");//выбор объектов по имени
+
+        heroRect = tmpHero.getRectangle();
+        bodyHero = physX.addObject(tmpHero);
+
+        aaaRect = tmpAAA.getRectangle();
+        bodyAAA = physX.addObject(tmpAAA);
+
+        scullRect = tmpScull.getRectangle();
+        bodyScull = physX.addObject(tmpScull);
+
+        earedRect1 = tmpEared1.getRectangle();
+        bodyEared1 = physX.addObject(tmpEared1);
+
         Array<RectangleMapObject> objects =  map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);
         for (int i = 0; i < objects.size; i++) {
             physX.addObject(objects.get(i));
@@ -73,22 +103,39 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        animation.setAnimation("sleep");
+        sound.stop(id);
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
             dispose();
             game.setScreen(new MenuScreen(this.game));}
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-10000, 0), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(10000, 0), true);
-//        if (Gdx.input.isKeyPressed(Input.Keys.UP) && mapSize.y+animation.getFrame().getRegionWidth()/2 < camera.position.y-1) camera.position.y -= STEP;
-//        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)
-//                && mapSize.height - animation.getFrame().getRegionWidth()/2 > camera.position.y+1) camera.position.y += STEP;
+
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            animation.setAnimation("go");
+            dir = true;
+            bodyHero.applyForceToCenter(new Vector2(-10000, 0), true);
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            animation.setAnimation("go");
+            dir = false;
+            bodyHero.applyForceToCenter(new Vector2(10000, 0), true);
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) ) {
+            animation.setAnimation("jump");
+            bodyHero.applyForceToCenter(new Vector2(0, 30000), true);
+            sound = Gdx.audio.newSound(Gdx.files.internal("sound/teleportatsii.mp3"));
+            id = sound.play(0.5f);
+            sound.play(0.5f);
+        }
+
         if (Gdx.input.isKeyPressed(Input.Keys.P)) camera.zoom += 0.01f;
         if (Gdx.input.isKeyPressed(Input.Keys.O) && camera.zoom > 0) camera.zoom -= 0.01f;
-        camera.position.x = body.getPosition().x;
-        camera.position.y = body.getPosition().y;
+
+        camera.position.x = bodyHero.getPosition().x* physX.PPM;
+        camera.position.y = bodyHero.getPosition().y* physX.PPM;
         camera.update();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) { dir = true; }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) { dir = false; }
         if (!animation.getFrame().isFlipX() && dir) {
             animation.getFrame().flip(true, false);
 
@@ -101,9 +148,11 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.5F, 0.2f, 1, 1);
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
+
         batch.setProjectionMatrix(camera.combined);
-        heroRect.x = body.getPosition().x - heroRect.width/2;
-        heroRect.y = body.getPosition().y - heroRect.height/2;
+        heroRect.x = bodyHero.getPosition().x - heroRect.width/2;
+        heroRect.y = bodyHero.getPosition().y - heroRect.height/2;
+
         batch.begin();
         batch.draw(animation.getFrame(), heroRect.x, heroRect.y, heroRect.width, heroRect.height);
         batch.end();
@@ -111,6 +160,10 @@ public class GameScreen implements Screen {
         mapRenderer.render(l1);
         physX.step();
         physX.debugDraw(camera);
+        for (int i = 0; i < bodies.size(); i++) {
+            physX.destroyBody(bodies.get(i));
+        }
+        bodies.clear();
     }
 
     @Override
@@ -137,5 +190,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
+        sound.dispose();
     }
 }
