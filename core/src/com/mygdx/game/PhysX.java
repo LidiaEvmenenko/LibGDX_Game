@@ -9,11 +9,17 @@ public class PhysX {
     private final World world;
     private final Box2DDebugRenderer debugRenderer;
     public final int PPM = 1;
+    private float restitution;
+    private MyContList myContList;
 
     public PhysX() {
         world = new World(new Vector2(0, -9.81f), true);
-        world.setContactListener(new MyContList());
+        myContList = new MyContList();
+        world.setContactListener(myContList);
         debugRenderer = new Box2DDebugRenderer();
+    }
+    public MyContList getMyContList() {
+        return myContList;
     }
 
     public Body addObject(RectangleMapObject object) {
@@ -46,20 +52,55 @@ public class PhysX {
 
         Body body;
         body = world.createBody(def);
+        if (type.equals("DynamicBody")) { body.setFixedRotation(true); }//запретили телу крутиться
+        else { body.setFixedRotation(false); }
         String name = object.getName();
         body.createFixture(fdef).setUserData(name);//создаем тело, текстуру, ключ
         if (name != null && name.equals("hero")){
             polygonShape.setAsBox(rect.width/12/PPM, rect.height/12/PPM,new Vector2(-7*rect.width/12/PPM, 0),0);
-            body.createFixture(fdef).setUserData("руки");
+            body.createFixture(fdef).setUserData("arms");
             body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
 
             polygonShape.setAsBox(rect.width/12/PPM, rect.height/12/PPM,new Vector2(7*rect.width/12/PPM, 0),0);
-            body.createFixture(fdef).setUserData("руки");
+            body.createFixture(fdef).setUserData("arms");
             body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
 
             polygonShape.setAsBox(rect.width/12/PPM, rect.height/12/PPM, new Vector2(0,-rect.width/2/PPM),0);
-            body.createFixture(fdef).setUserData("ноги");
-            body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);// сенсор для обработки пересечений
+            body.createFixture(fdef).setUserData("legs");
+            body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
+
+            polygonShape.setAsBox(rect.width/12/PPM, rect.height/12/PPM, new Vector2(-7*rect.width/12/PPM,-rect.width/2/PPM),0);
+            body.createFixture(fdef).setUserData("legsL");
+            body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
+
+            polygonShape.setAsBox(rect.width/12/PPM, rect.height/12/PPM, new Vector2(7*rect.width/12/PPM,-rect.width/2/PPM),0);
+            body.createFixture(fdef).setUserData("legsR");
+            body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
+
+            //  body.createFixture(fdef).setUserData(new String("стена"));//создаем тело, текстуру, ключ
+
+        }
+
+        if (object.getName() != null && object.getName().equals("descent1")) {
+            body.setTransform(74,150,43);
+        }
+        if (object.getName() != null && object.getName().equals("climb1")) {
+            body.setTransform(170,122,-40);
+        }
+        if (object.getName() != null && object.getName().equals("descent2")) {
+            body.setTransform(489,104,40);
+        }
+        if (object.getName() != null && object.getName().equals("descent3")) {
+            body.setTransform(565,64,43);
+        }
+        if (object.getName() != null && object.getName().equals("climb2")) {
+            body.setTransform(645,66,-40);
+        }
+        if (object.getName() != null && object.getName().equals("climb3")) {
+            body.setTransform(819,85,-40);
+        }
+        if (object.getName() != null && object.getName().equals("climb4")) {
+            body.setTransform(965,150,20);
         }
         polygonShape.dispose();
         return body;

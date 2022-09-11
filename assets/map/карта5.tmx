@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="69" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="72">
+ <tileset firstgid="1" name="kartin" tilewidth="16" tileheight="16" tilecount="4725" columns="75">
+  <image source="kartin.png" width="1200" height="1017"/>
+ </tileset>
+ <tileset firstgid="4726" name="kartin.png" tilewidth="16" tileheight="16" tilecount="4725" columns="75">
+  <image source="kartin.png" width="1200" height="1017"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="1961" duration="100"/>
+    <frame tileid="2036" duration="100"/>
+    <frame tileid="2111" duration="100"/>
+    <frame tileid="2186" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="374">
+   <animation>
+    <frame tileid="1510" duration="100"/>
+    <frame tileid="1511" duration="100"/>
+    <frame tileid="1437" duration="100"/>
+    <frame tileid="1434" duration="100"/>
+    <frame tileid="1509" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="449">
+   <animation>
+    <frame tileid="2410" duration="100"/>
+    <frame tileid="2485" duration="100"/>
+    <frame tileid="2560" duration="100"/>
+    <frame tileid="2635" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="524">
+   <animation>
+    <frame tileid="2337" duration="100"/>
+    <frame tileid="2412" duration="100"/>
+    <frame tileid="2487" duration="100"/>
+    <frame tileid="2562" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="599">
+   <animation>
+    <frame tileid="1961" duration="100"/>
+    <frame tileid="2036" duration="100"/>
+    <frame tileid="2111" duration="100"/>
+    <frame tileid="2186" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="9451" name="kartin.png" tilewidth="16" tileheight="16" tilecount="4725" columns="75">
+  <image source="kartin.png" width="1200" height="1017"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="1961" duration="100"/>
+    <frame tileid="2036" duration="100"/>
+    <frame tileid="2111" duration="100"/>
+    <frame tileid="2186" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="374">
+   <animation>
+    <frame tileid="1510" duration="100"/>
+    <frame tileid="1511" duration="100"/>
+    <frame tileid="1437" duration="100"/>
+    <frame tileid="1434" duration="100"/>
+    <frame tileid="1509" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="449">
+   <animation>
+    <frame tileid="2410" duration="100"/>
+    <frame tileid="2485" duration="100"/>
+    <frame tileid="2560" duration="100"/>
+    <frame tileid="2635" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="524">
+   <animation>
+    <frame tileid="2337" duration="100"/>
+    <frame tileid="2412" duration="100"/>
+    <frame tileid="2487" duration="100"/>
+    <frame tileid="2562" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="599">
+   <animation>
+    <frame tileid="1961" duration="100"/>
+    <frame tileid="2036" duration="100"/>
+    <frame tileid="2111" duration="100"/>
+    <frame tileid="2186" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="фон" width="69" height="33">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="4" name="Слой 2" width="69" height="33">
+  <data encoding="base64" compression="zlib">
+   eJzt00cRwlAURuErgbrBQLZAggWc0CxQfVA8YIK6RQNNAxuOiweT882c/X3/JBGSJEmSJEmSJOkXDYqIYRYxojFN6JanviqtPZus2WBDW9pRK0t9VVofNrmzw4Oe9KJ3yb+Tfi+izS4d6lJORZH6qrSmvH9Gc1rQklYl3+TA+490ojNd6FryTSr8O1WqUZ0a1OylvkqS/tcXEZUdGA==
+  </data>
+ </layer>
+ <layer id="5" name="Слой 3" width="69" height="33">
+  <data encoding="base64" compression="zlib">
+   eJzt09cJAkEYReExFGIoYbUFc+jCgKEXc+jCrIUYHoxgGaYjWIK4wtwDH4JPc39YY5RSSimllFJKKaWUUkoppdQ/t3aM2WCLneP2a/6jQMSYIEIIR9x+ze8rsLmIEsqf/RV+q6ihbtlNrnwXIzaPMcEUM8yxwBIry24SixpzY/MdDzzf+/nPAy988EfdfuVve98kjgSSSCGNDLLIIW/ZTRrsbaKFNjroooc+BhhadpM9ew844oQzLpbdQH2vF0KJLWI=
+  </data>
+ </layer>
+ <objectgroup id="2" name="heroes">
+  <object id="1" name="hero" x="31.5" y="299.5" width="15" height="17">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="friction" type="float" value="3"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0.5"/>
+   </properties>
+  </object>
+  <object id="2" name="hedgehog" x="681" y="438" width="10" height="9">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="3" name="beetle" x="344.5" y="383.5" width="15.5" height="10.5">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="friction" type="float" value="1"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="11" name="dragon" x="905.333" y="283.333" width="45" height="45">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="friction" type="float" value="2"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="объекты">
+  <object id="9" name="стена" x="1100.5" y="5" width="4" height="517">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="10" name="стена" x="2" y="23" width="5" height="501">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="12" x="4" y="2.5" width="1099" height="4">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="14" name="земля" x="7.66667" y="317.833" width="28.5" height="3">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="16" name="земля" x="8" y="519.5" width="1093.5" height="6">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="29" name="земля" x="101.667" y="416.5" width="64.8333" height="1">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="32" name="земля" x="179" y="394.5" width="282" height="3">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="40" name="земля" x="516.5" y="454" width="41.5" height="3.5">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="42" name="земля" x="571.833" y="473.5" width="64.1667" height="2.5">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="43" name="земля" x="655" y="451" width="154" height="2">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="47" name="земля" x="829.5" y="430.5" width="111" height="3">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="51" name="земля" x="914.667" y="330" width="23" height="2.33333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="53" name="end" x="945.667" y="322" width="14" height="2.33333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" name="descent1" x="37.333" y="319.334" width="135.454" height="1.33333" rotation="50">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="64" name="climb4" x="941.333" y="430.666" width="106.333" height="2.33333" rotation="-60">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="65" name="climb1" x="161.446" y="418.363" width="27.4513" height="1.33333" rotation="-50">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="67" name="descent2" x="460.5" y="397.833" width="78.4824" height="1.33333" rotation="45">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="68" name="descent3" x="576.846" y="465.728" width="21.1308" height="1.33333" rotation="60">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="69" name="climb2" x="641.667" y="461.333" width="26" height="1.66667" rotation="-50">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="70" name="climb3" x="810.243" y="447.924" width="27.1411" height="2" rotation="-50">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="71" name="земля" x="1003" y="340.333" width="95.3333" height="2.33333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

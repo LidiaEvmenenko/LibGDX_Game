@@ -1,0 +1,48 @@
+
+unnamed.png
+size: 512, 64
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+hedgehog
+  rotate: false
+  xy: 0, 0
+  size: 69, 39
+  orig: 69, 39
+  offset: 0, 0
+  index: 4
+hedgehog
+  rotate: false
+  xy: 69, 1
+  size: 67, 38
+  orig: 67, 38
+  offset: 0, 0
+  index: 2
+hedgehog
+  rotate: false
+  xy: 136, 4
+  size: 63, 35
+  orig: 63, 35
+  offset: 0, 0
+  index: 6
+hedgehog
+  rotate: false
+  xy: 199, 1
+  size: 55, 38
+  orig: 55, 38
+  offset: 0, 0
+  index: 1
+hedgehog
+  rotate: false
+  xy: 254, 0
+  size: 53, 39
+  orig: 53, 39
+  offset: 0, 0
+  index: 3
+hedgehog
+  rotate: false
+  xy: 307, 4
+  size: 51, 35
+  orig: 51, 35
+  offset: 0, 0
+  index: 5
