@@ -5,22 +5,22 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AnimHedgehog {
-    private TextureAtlas atlasHedgehog;
-    private Animation<TextureRegion> anmHedgehog;
+    private TextureAtlas atlas;
+    private Animation<TextureRegion> anm;
     private float time;
 
     public AnimHedgehog() {
-        atlasHedgehog = new TextureAtlas("atlas/hedgehog/unnamed.atlas");
-        anmHedgehog = new Animation<TextureRegion>(1/5f, atlasHedgehog.findRegions("hedgehog"));
-        anmHedgehog.setPlayMode(Animation.PlayMode.LOOP);
+        atlas = new TextureAtlas("atlas/hedgehog/unnamed.atlas");
+        anm = new Animation<TextureRegion>(1/5f, atlas.findRegions("hedgehog"));
+        anm.setPlayMode(Animation.PlayMode.LOOP);
         time += Gdx.graphics.getDeltaTime();
     }
 
-    public TextureRegion getFrameHedgehog(){ return anmHedgehog.getKeyFrame(time);}
+    public TextureRegion getFrameHedgehog(){ return anm.getKeyFrame(time);}
 
     public void setTime(float time) {
         this.time += time;
     }
 
-    public void dispose () { atlasHedgehog.dispose(); }
+    public void dispose () { atlas.dispose(); }
 }

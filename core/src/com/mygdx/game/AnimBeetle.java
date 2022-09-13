@@ -5,23 +5,23 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AnimBeetle {
-    private TextureAtlas atlasBeetle;
-    private Animation<TextureRegion> anmBeetle;
+    private TextureAtlas atlas;
+    private Animation<TextureRegion> anm;
     private float time;
-    private String traffic;
+
 
     public AnimBeetle() {
-        atlasBeetle = new TextureAtlas("atlas/beetle/unnamed.atlas");
-        anmBeetle = new Animation<TextureRegion>(1/5f, atlasBeetle.findRegions("go"));
-        anmBeetle.setPlayMode(Animation.PlayMode.LOOP);
+        atlas = new TextureAtlas("atlas/beetle/unnamed.atlas");
+        anm = new Animation<TextureRegion>(1/5f, atlas.findRegions("go"));
+        anm.setPlayMode(Animation.PlayMode.LOOP);
         time += Gdx.graphics.getDeltaTime();
     }
 
-    public TextureRegion getFrameBeetle(){ return anmBeetle.getKeyFrame(time);}
+    public TextureRegion getFrameBeetle(){ return anm.getKeyFrame(time);}
 
     public void setTime(float time) {
         this.time += time;
     }
 
-    public void dispose () { atlasBeetle.dispose(); }
+    public void dispose () { atlas.dispose(); }
 }

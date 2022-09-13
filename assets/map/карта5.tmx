@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="69" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="72">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="69" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="74">
  <tileset firstgid="1" name="kartin" tilewidth="16" tileheight="16" tilecount="4725" columns="75">
   <image source="kartin.png" width="1200" height="1017"/>
  </tileset>
@@ -110,7 +110,7 @@
   <object id="1" name="hero" x="31.5" y="299.5" width="15" height="17">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
-    <property name="friction" type="float" value="3"/>
+    <property name="friction" type="float" value="5"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
@@ -183,11 +183,11 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="32" name="земля" x="179" y="394.5" width="282" height="3">
+  <object id="32" name="земля1" x="179" y="394.5" width="282" height="3">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0"/>
+    <property name="restitution" type="float" value="0.1"/>
    </properties>
   </object>
   <object id="40" name="земля" x="516.5" y="454" width="41.5" height="3.5">
@@ -239,35 +239,35 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="64" name="climb4" x="941.333" y="430.666" width="106.333" height="2.33333" rotation="-60">
+  <object id="64" name="climb4" x="941.333" y="430.666" width="116.684" height="2.33333" rotation="-60">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="65" name="climb1" x="161.446" y="418.363" width="27.4513" height="1.33333" rotation="-50">
+  <object id="65" name="climb1" x="161.446" y="418.363" width="29.2476" height="1.33333" rotation="-50">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="67" name="descent2" x="460.5" y="397.833" width="78.4824" height="1.33333" rotation="45">
+  <object id="67" name="descent2" x="462.333" y="399.666" width="75.8897" height="1.33333" rotation="45">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="68" name="descent3" x="576.846" y="465.728" width="21.1308" height="1.33333" rotation="60">
+  <object id="68" name="descent3" x="576.907" y="465.834" width="24.8509" height="1.33333" rotation="60">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="69" name="climb2" x="641.667" y="461.333" width="26" height="1.66667" rotation="-50">
+  <object id="69" name="climb2" x="638.071" y="465.618" width="28.1338" height="1.66667" rotation="-50">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
@@ -281,7 +281,21 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="71" name="земля" x="1003" y="340.333" width="95.3333" height="2.33333">
+  <object id="71" name="земля" x="999" y="340.333" width="99.3333" height="2.33333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="72" name="земля" x="902.333" y="327" width="2" height="3">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="73" name="земля" x="951.667" y="325.667" width="1.33333" height="2.66667">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
