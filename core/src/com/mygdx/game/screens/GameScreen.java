@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,61 +26,64 @@ public class GameScreen implements Screen {
     private Vector2 posDragon;
     private Vector2 posBeetle;
     private Vector2 posHedgehog;
+
     private Vector2 vDragon;
     private Vector2 vBeetle;
     private Vector2 vHedgehog;
+
     private boolean dir = false;
     private boolean dirDragon = false;
     private boolean dirBeetle = false;
     private boolean dirHedgehog = false;
+
     private AnimHero animHero;
     private AnimDragon animDragon;
     private AnimBeetle animBeetle;
     private AnimHedgehog animHedgehog;
+
     private Main game;
     private SpriteBatch batch;
     private OrthographicCamera camera;
     private TiledMap map;
     private OrthogonalTiledMapRenderer mapRenderer;
-    private Vector2 mapPosition;
+
     private float STEP = 3;
-    private Rectangle mapSize;
+
     private int[] bg;
     private int[] l1;
 
-    private MyConsole myConsole;
     private PhysX physX;
-    private Body bodyHero;
 
+    private Body bodyHero;
     private Body bodyHedgehog;
     private Body bodyBeetle;
     private Body bodyDragon;
-    //    private Body bodyKey;
-    private Rectangle heroRect;
 
+    private Rectangle heroRect;
     private Rectangle hedgehogRect;
     private Rectangle beetleRect;
     private Rectangle dragonRect;
-    //   private Rectangle keyRect;
 
     public static List<Body> bodies;
     private Sound sound = null;
-    private long id;
     private MyContList myContList;
+
     private RectangleMapObject tmpDragon;
     private RectangleMapObject tmpHedgehog;
     private RectangleMapObject tmpBeetle;
 
+    private int countEnd = 60;
+
     public GameScreen(Main game) {
-//        sound = Gdx.audio.newSound(Gdx.files.internal("sound/skrip-otkryivayuscheysya-dveri.mp3"));
-//        sound.play();
         bodies = new ArrayList<>();
         animHero = new AnimHero();
         animDragon = new AnimDragon();
         animBeetle = new AnimBeetle();
         animHedgehog = new AnimHedgehog();
+
         this.game = game;
         batch = new SpriteBatch();
+
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.25f;
         map = new TmxMapLoader().load("map/карта5.tmx");
@@ -92,49 +96,7 @@ public class GameScreen implements Screen {
         l1[1] = map.getLayers().getIndex("Слой 3");
         physX = new PhysX();
         this.myContList = physX.getMyContList();
-        map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);//выбор объектов по типу
-        RectangleMapObject tmpHero = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("hero");//выбор объектов по имени
-        tmpHedgehog = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("hedgehog");//выбор объектов по имени
-        tmpBeetle = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("beetle");//выбор объектов по имени
-        //    tmpKey = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("key");//выбор объектов по имени
-        tmpDragon = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("dragon");//выбор объектов по имени
-
-        heroRect = tmpHero.getRectangle();
-        bodyHero = physX.addObject(tmpHero);
-
-        posDragon = new Vector2(tmpDragon.getRectangle().x, tmpDragon.getRectangle().y);
-        vDragon = new Vector2(1, 0);
-        tmpDragon.getRectangle().setPosition(posDragon);
-        dragonRect = tmpDragon.getRectangle();
-        bodyDragon = physX.addObject(tmpDragon);
-        bodyDragon.getPosition().set(posDragon);
-        animDragon.getFrameDragon().flip(true, false);
-
-        posHedgehog = new Vector2(tmpHedgehog.getRectangle().x, tmpHedgehog.getRectangle().y);
-        vHedgehog = new Vector2(1, 0);
-        tmpHedgehog.getRectangle().setPosition(posHedgehog);
-        hedgehogRect = tmpHedgehog.getRectangle();
-        bodyHedgehog = physX.addObject(tmpHedgehog);
-        bodyHedgehog.getPosition().set(posHedgehog);
-
-        posBeetle = new Vector2(tmpBeetle.getRectangle().x, tmpBeetle.getRectangle().y);
-        vBeetle = new Vector2(1, 0);
-        tmpBeetle.getRectangle().setPosition(posBeetle);
-        beetleRect = tmpBeetle.getRectangle();
-        bodyBeetle = physX.addObject(tmpBeetle);
-        bodyBeetle.getPosition().set(posBeetle);
-
-        hedgehogRect = tmpHedgehog.getRectangle();
-        bodyHedgehog = physX.addObject(tmpHedgehog);
-
-        myConsole = new MyConsole(bodyHero, animHero);
-
-        Gdx.input.setInputProcessor(myConsole);
-
-        Array<RectangleMapObject> objects =  map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);
-        for (int i = 0; i < objects.size; i++) {
-            physX.addObject(objects.get(i));
-        }
+        createObjects();
     }
 
     @Override
@@ -144,8 +106,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-//        animation.setAnimation("sleep");
-//        sound.stop(id);
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
             dispose();
             game.setScreen(new MenuScreen(this.game));}
@@ -154,82 +115,20 @@ public class GameScreen implements Screen {
             dispose();
             game.setScreen(new GameOverScreen(this.game));
         }
+        heroTraffic();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-
-            dir = true;
-
+        sound = myContList.getSound();
+        if (sound != null) {
+            sound.stop();
         }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-
-            dir = false;
-
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.P)) camera.zoom += 0.01f;
-        if (Gdx.input.isKeyPressed(Input.Keys.O) && camera.zoom > 0) camera.zoom -= 0.01f;
-
-        camera.position.x = bodyHero.getPosition().x* physX.PPM;
-        camera.position.y = bodyHero.getPosition().y* physX.PPM;
-        camera.update();
-
-        if (!animHero.getFrame().isFlipX() && dir) {
-            animHero.getFrame().flip(true, false);
-
-        }//налево
-        if (animHero.getFrame().isFlipX() && !dir) {
-            animHero.getFrame().flip(true, false);
-
-        }//направо
-        animHero.setTime(Gdx.graphics.getDeltaTime());
-        animDragon.setTime(Gdx.graphics.getDeltaTime());
-        animBeetle.setTime(Gdx.graphics.getDeltaTime());
-        animHedgehog.setTime(Gdx.graphics.getDeltaTime());
-        ScreenUtils.clear(0.5F, 0.2f, 1, 1);
-        mapRenderer.setView(camera);
-        mapRenderer.render(bg);
-
-        batch.setProjectionMatrix(camera.combined);
-        heroRect.x = bodyHero.getPosition().x - heroRect.width/2;
-        heroRect.y = bodyHero.getPosition().y - heroRect.height/2;
-
-        dragonRect.x = bodyDragon.getPosition().x - dragonRect.width/2;
-        dragonRect.y = bodyDragon.getPosition().y - dragonRect.height/2;
-        dragonRect.x = bodyDragon.getPosition().x* physX.PPM;
-        dragonRect.y = bodyDragon.getPosition().y* physX.PPM;
 
         beetleRect.x = bodyBeetle.getPosition().x * physX.PPM;
         beetleRect.y = bodyBeetle.getPosition().y * physX.PPM;
         bodyBeetle.applyForceToCenter(new Vector2(7000 * vBeetle.x, 0), true);
-
-        hedgehogRect.x = bodyHedgehog.getPosition().x * physX.PPM;
-        hedgehogRect.y = bodyHedgehog.getPosition().y * physX.PPM;
         bodyHedgehog.applyForceToCenter(new Vector2(7000 * vHedgehog.x, 0), true);
 
-        batch.begin();
-        batch.draw(animHero.getFrame(), heroRect.x, heroRect.y, heroRect.width, heroRect.height);
-        if (myContList.countBeetle < 3) {
-            batch.draw(animBeetle.getFrameBeetle(), beetleRect.x - beetleRect.width / 2,
-                    beetleRect.y - beetleRect.height / 2, beetleRect.width, beetleRect.height);
-        }
-        if (myContList.countDragon >= 3) {
-            animDragon.setAnimationDragon("dead");
-            batch.draw(animDragon.getFrameDragon(), dragonRect.x - dragonRect.width / 2,
-                    dragonRect.y - dragonRect.height / 2, dragonRect.width, dragonRect.height);
-        } else {
-            batch.draw(animDragon.getFrameDragon(), dragonRect.x - dragonRect.width / 2,
-                    dragonRect.y - dragonRect.height / 2, dragonRect.width, dragonRect.height);
-        }
-        if (myContList.countHedgehog < 3) {
-            batch.draw(animHedgehog.getFrameHedgehog(), hedgehogRect.x - hedgehogRect.width / 2,
-                    hedgehogRect.y - hedgehogRect.height / 2, hedgehogRect.width, hedgehogRect.height);
-        }
-        batch.end();
+        batchDraw();
 
-        mapRenderer.render(l1);
-        physX.step();
-        physX.debugDraw(camera);
         for (int i = 0; i < bodies.size(); i++) {
             physX.destroyBody(bodies.get(i));
         }
@@ -267,6 +166,153 @@ public class GameScreen implements Screen {
         hedgehogRect.setCenter(posHedgehog);
     }
 
+    private void setPos(Rectangle rect, Body body) {
+        rect.x = body.getPosition().x * physX.PPM;
+        rect.y = body.getPosition().y * physX.PPM;
+    }
+
+    private void batchDraw() {
+        camera.position.x = bodyHero.getPosition().x * physX.PPM;
+        camera.position.y = bodyHero.getPosition().y * physX.PPM;
+        camera.update();
+
+        animHero.setTime(Gdx.graphics.getDeltaTime());
+        animDragon.setTime(Gdx.graphics.getDeltaTime());
+        animBeetle.setTime(Gdx.graphics.getDeltaTime());
+        animHedgehog.setTime(Gdx.graphics.getDeltaTime());
+
+        ScreenUtils.clear(0.5F, 0.2f, 1, 1);
+
+        mapRenderer.setView(camera);
+        mapRenderer.render(bg);
+
+        batch.setProjectionMatrix(camera.combined);
+        heroRect.x = bodyHero.getPosition().x - heroRect.width / 2;
+        heroRect.y = bodyHero.getPosition().y - heroRect.height / 2;
+        setPos(dragonRect, bodyDragon);
+        setPos(beetleRect, bodyBeetle);
+        setPos(hedgehogRect, bodyHedgehog);
+        if (myContList.getCountLife() == 0) {
+            animHero.setAnimationHero("over");
+            countEnd--;
+            if (countEnd == 0) {
+                dispose();
+                this.game.setScreen(new MenuScreen(this.game));
+            }
+
+        }
+        batch.begin();
+
+        batch.draw(animHero.getFrame(), heroRect.x, heroRect.y, heroRect.width, heroRect.height);
+
+        if (myContList.countBeetle < 3) {
+            batch.draw(animBeetle.getFrameBeetle(), beetleRect.x - beetleRect.width / 2,
+                    beetleRect.y - beetleRect.height / 2, beetleRect.width, beetleRect.height);
+        }
+        if (myContList.countDragon >= 3) {
+            animDragon.setDragonDead();
+            batch.draw(animDragon.getFrameDragon(), dragonRect.x - dragonRect.width / 2,
+                    dragonRect.y - dragonRect.height / 2, dragonRect.width, dragonRect.height);
+        } else {
+            batch.draw(animDragon.getFrameDragon(), dragonRect.x - dragonRect.width / 2,
+                    dragonRect.y - dragonRect.height / 2, dragonRect.width, dragonRect.height);
+        }
+        if (myContList.countHedgehog < 3) {
+            batch.draw(animHedgehog.getFrameHedgehog(), hedgehogRect.x - hedgehogRect.width / 2,
+                    hedgehogRect.y - hedgehogRect.height / 2, hedgehogRect.width, hedgehogRect.height);
+        }
+
+        batch.end();
+        mapRenderer.render(l1);
+        physX.step();
+    }
+
+    private void heroTraffic() {
+        if (myContList.getCountLife() != 0) {
+            if (myContList.isContLet()) {
+                animHero.setAnimationHero("go");
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.P)) camera.zoom += 0.01f;
+            if (Gdx.input.isKeyPressed(Input.Keys.O) && camera.zoom > 0) camera.zoom -= 0.01f;
+
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                dir = true;
+
+                animHero.setAnimationHero("go");
+                sound = myContList.getSound();
+                if (sound != null) {
+                    sound.play();
+                }
+                bodyHero.applyForceToCenter(new Vector2(-50000, 0), true);
+
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                dir = false;
+
+                sound = myContList.getSound();
+                if (sound != null) {
+                    sound.play();
+                }
+                animHero.setAnimationHero("go");
+                bodyHero.applyForceToCenter(new Vector2(50000, 0), true);
+
+            } else if (Gdx.input.isKeyPressed(Input.Keys.UP) && bodyHero.getLinearVelocity().y > 0) {
+                animHero.setAnimationHero("jumpUp");
+                bodyHero.applyForceToCenter(new Vector2(10, 50000), true);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.UP) && bodyHero.getLinearVelocity().y < 0) {
+                animHero.setAnimationHero("jumpDown");
+            } else {
+                animHero.setAnimationHero("sleep");
+                if (myContList.getCont()) {
+                    animHero.setAnimationHero("hit");
+                }
+            }
+
+            if (!animHero.getFrame().isFlipX() && dir) {
+                animHero.getFrame().flip(true, false);
+            }//налево
+            if (animHero.getFrame().isFlipX() && !dir) {
+                animHero.getFrame().flip(true, false);
+            }//направо
+        }
+    }
+    private void createObjects() {
+        map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);//выбор объектов по типу
+        RectangleMapObject tmpHero = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("hero");//выбор объектов по имени
+        tmpHedgehog = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("hedgehog");//выбор объектов по имени
+        tmpBeetle = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("beetle");//выбор объектов по имени
+        tmpDragon = (RectangleMapObject) map.getLayers().get("heroes").getObjects().get("dragon");//выбор объектов по имени
+
+        heroRect = tmpHero.getRectangle();
+        bodyHero = physX.addObject(tmpHero);
+
+        posDragon = new Vector2(tmpDragon.getRectangle().x, tmpDragon.getRectangle().y);
+        vDragon = new Vector2(1, 0);
+        tmpDragon.getRectangle().setPosition(posDragon);
+        dragonRect = tmpDragon.getRectangle();
+        bodyDragon = physX.addObject(tmpDragon);
+        bodyDragon.getPosition().set(posDragon);
+        animDragon.getFrameDragon().flip(true, false);
+
+        posHedgehog = new Vector2(tmpHedgehog.getRectangle().x, tmpHedgehog.getRectangle().y);
+        vHedgehog = new Vector2(1, 0);
+        tmpHedgehog.getRectangle().setPosition(posHedgehog);
+        hedgehogRect = tmpHedgehog.getRectangle();
+        bodyHedgehog = physX.addObject(tmpHedgehog);
+        bodyHedgehog.getPosition().set(posHedgehog);
+
+        posBeetle = new Vector2(tmpBeetle.getRectangle().x, tmpBeetle.getRectangle().y);
+        vBeetle = new Vector2(1, 0);
+        tmpBeetle.getRectangle().setPosition(posBeetle);
+        beetleRect = tmpBeetle.getRectangle();
+        bodyBeetle = physX.addObject(tmpBeetle);
+        bodyBeetle.getPosition().set(posBeetle);
+
+        Array<RectangleMapObject> objects = map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);
+        for (int i = 0; i < objects.size; i++) {
+            physX.addObject(objects.get(i));
+        }
+    }
+
     @Override
     public void resize(int width, int height) {
         camera.viewportHeight = height;
@@ -290,7 +336,13 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
         if (sound != null) { sound.dispose(); }
+        this.physX.dispose();
+        batch.dispose();
+        this.animHero.dispose();
+        this.animHedgehog.dispose();
+        this.animDragon.dispose();
+        this.animBeetle.dispose();
+        this.mapRenderer.dispose();
     }
 }

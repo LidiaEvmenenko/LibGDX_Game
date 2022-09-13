@@ -4,20 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Main;
+import com.mygdx.game.*;
 
 public class MenuScreen implements Screen {
-    private Texture img;
     private Texture imgStart;
-    private Texture imgBtnStart;
     private SpriteBatch batch;
-    private Vector2 vStartBtn;
     private Main game;
     private Rectangle startRect;
     private float xStart;
@@ -49,24 +44,20 @@ public class MenuScreen implements Screen {
         super();
         this.game = game;
         batch = new SpriteBatch();
-        imgBtnStart = new Texture("start.png");
-        vStartBtn = new Vector2();
-        xStart = (Gdx.graphics.getWidth() - imgBtnStart.getWidth())/2;
-        yStart = (Gdx.graphics.getHeight() - imgBtnStart.getHeight())/2;
-        //  shapeRenderer = new ShapeRenderer();
+        xStart = 215;
+        yStart = 185;
         startRect = new Rectangle(xStart, yStart,
-                imgBtnStart.getWidth(), imgBtnStart.getHeight());
+                210, 90);
         music = Gdx.audio.newMusic(Gdx.files.internal("sound/Kalimba.mp3"));
         music.setLooping(true);// зациклить музыку
         music.setVolume(0.05f);//громкость
-        //  music.pause();//пауза
         music.play();//воспроизведение
 
     }
 
     @Override
     public void show() {
-        imgStart = new Texture("start.png");
+        imgStart = new Texture("Start.png");
     }
 
     @Override
@@ -79,18 +70,16 @@ public class MenuScreen implements Screen {
                 game.setScreen(new GameScreen(this.game));
             }
         }
-        ScreenUtils.clear(0.3f, 0.9f, 1, 1);
+        ScreenUtils.clear(1, 1, 1, 1);
         batch.begin();
-        batch.draw(imgStart, xStart,yStart);
+        batch.draw(imgStart, 0,0);
         batch.end();
     }
 
     @Override
     public void dispose() {
-        imgBtnStart.dispose();
         imgStart.dispose();
         batch.dispose();
         music.dispose();
-
     }
 }
